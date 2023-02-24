@@ -2,6 +2,7 @@ import { Connections } from "../interfaces/Connections.interfaces";
 import express, { Application } from "express";
 const bp = require("body-parser")
 import cors from "cors"
+import { User } from "../models/User.model";
 
 export class Server {
     private app: Application
@@ -14,6 +15,7 @@ export class Server {
         this.dbConnect()
         this.port = _port
         this.listen()
+        this.syncDatabase()
     }
 
     middlewares() {
@@ -35,5 +37,9 @@ export class Server {
         this.app.listen(this.port, () => {
             console.log(`Servidor corriendo en puerto ${this.port}`)
         })
+    }
+
+    syncDatabase() {
+        const user = User
     }
 }
