@@ -1,7 +1,8 @@
+import { PostgresConn } from './connections/Postgres.connection'
+import { Server } from "./config/server.config";
 import dotenv from 'dotenv'
 dotenv.config()
-import { PostgresConn } from './src/connections/Postgres.connection'
-import { Server } from "./src/config/server.config";
+
 
 const _port = process.env.PORT || '3000'
 
