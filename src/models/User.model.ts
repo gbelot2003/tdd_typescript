@@ -10,7 +10,7 @@ export const User = db.define<UsersInterface>(
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         unique: true,
     },
     name: {
