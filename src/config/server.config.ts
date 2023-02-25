@@ -28,9 +28,9 @@ export class Server {
         this.app.use(cors())
     }
 
-    dbConnect() {
+    async dbConnect() {
         const conn = this._connection
-        conn.createConnection()
+        await conn.createConnection()
     }
 
     listen() {
