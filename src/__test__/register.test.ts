@@ -13,10 +13,17 @@ describe('User', function() {
         })
     })
 
-    describe('register service', () => {
+    describe('register a user', () => {
         it('create ', async () => {
             const register = await new RegisterService().registerNewUser("Gerardo", "gbelort", "123456")
             expect(register).toMatchObject({"name": "Gerardo"})
+        })
+
+        it('contains alredy a user', async () => {
+            await User.create({ name: "Gerardo", email: "gbelort", password: "password", state: true })
+
+            const register = await new RegisterService().registerNewUser("Gerardo", "gbelort", "123456")
+            expect(register).toBe('USER_ALREDY_EXIST')
         })
     })
 })
