@@ -9,4 +9,6 @@ export interface Connections {
     DB_HOST: string
 
     createConnection(): Sequelize;
+
+    syncDatabase(): any
 }

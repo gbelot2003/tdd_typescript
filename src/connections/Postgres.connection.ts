@@ -15,7 +15,7 @@ export class PostgresConn implements Connections {
         this.DB_HOST = db_host
     }
 
-    createConnection(): Sequelize {
+    public createConnection(): Sequelize {
         const db = new Sequelize(this.DB_DATABASE, this.DB_USER, this.DB_PASSWORD, {
             host: this.DB_HOST,
             dialect: 'postgres'
@@ -23,5 +23,9 @@ export class PostgresConn implements Connections {
         console.log("connection success!!!")
 
         return db
+    }
+
+    public syncDatabase(){
+        return this.createConnection().sync()
     }
 }
