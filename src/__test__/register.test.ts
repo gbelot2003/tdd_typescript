@@ -1,20 +1,22 @@
-import { UsersInterface } from "../interfaces/User.interface";
-import User from "../models/User.model";
-import { RegisterService } from "../services/register.service";
+import User from "../models/User.model"
+import { RegisterService } from "../services/register.service"
 
-const mock = jest.mock("../models/User.model.ts")
+//jest.mock("../models/User.model");
 
 
-beforeEach(() => {
-    jest.resetAllMocks()
-})
+describe('User', function() {
+    beforeAll(function(done){
+        User.sync({force: true}).then(() => {
+            done(null)
+        }).catch((err) => {
+            done(err)
+        })
+    })
 
-describe("given a new instance of Users model", () => {
-    it("set a the new user", async () => {
-
-        //await User.create({ name: "Gerardo", email: "gbel@jasu.com", password:"passsw", state: true })
-        const service = await new RegisterService().registerNewUser("Gerardo", "gbelot@jasd.com", "123456a")
-        expect(service).toBe("USER_ALREDY_EXIST");
-
+    describe('register service', () => {
+        it('create ', async () => {
+            const register = await new RegisterService().registerNewUser("Gerardo", "gbelort", "123456")
+            expect(register).toMatchObject({"name": "Gerardo"})
+        })
     })
 })

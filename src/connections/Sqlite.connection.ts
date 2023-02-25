@@ -1,7 +1,7 @@
 import { Connections } from "../interfaces/Connections.interfaces"
 import { Sequelize } from "sequelize"
 
-export class PostgresConn implements Connections {
+export class Sqlite implements Connections {
 
     public DB_DATABASE: string
     public DB_USER: string
@@ -16,12 +16,7 @@ export class PostgresConn implements Connections {
     }
 
     public createConnection(): Sequelize {
-        const db = new Sequelize(this.DB_DATABASE, this.DB_USER, this.DB_PASSWORD, {
-            host: this.DB_HOST,
-            dialect: 'postgres',
-            omitNull: true,
-        })
-
+        const db = new Sequelize('sqlite:memory')
         return db
     }
 

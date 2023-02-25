@@ -1,3 +1,4 @@
+/**
 import {Table, Column, Model, Unique, PrimaryKey, AutoIncrement} from 'sequelize-typescript';
 import { UsersInterface } from '../interfaces/User.interface';
 @Table
@@ -21,15 +22,15 @@ export default class User extends Model<User> {
     state!: boolean
 }
 
+ */
 
-/**
 import { UsersInterface } from "../interfaces/User.interface";
-import { DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { sqlconn } from "../connections/Connec.connections"
 
 const db = sqlconn.createConnection();
 
-export const User = db.define<UsersInterface>(
+const User = db.define<UsersInterface>(
     'user', {
     id: {
         allowNull: false,
@@ -61,4 +62,6 @@ User.sync().then(() => {
     console.log("Table Users sync")
 }).catch((err) => {
     console.log("Table Users error" + err)
-})*/
+})
+
+export default User;
