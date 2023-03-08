@@ -1,7 +1,6 @@
-import { RegisterService } from "../services/register.service";
-import { CheckUser } from "../services/checkUser.service";
-import { UserRepository } from "../repositories/User.repository";
-import { passwordHandler } from "../utils/password.handler";
+import { RegisterService } from "../../services/register.service";
+import { CheckUser } from "../../services/checkUser.service";
+import { passwordHandler } from "../../utils/password.handler";
 
 const mockUserRepo = {
     findBy: jest.fn(),
@@ -26,13 +25,11 @@ describe('testing create service', () => {
 
         const checker = await new CheckUser(mockUserRepo).checkIfUserExist(user.email)
 
-        
-
         new RegisterService(mockUserRepo)
             .registerNewUser(user, checker, pass)
 
         expect(mockUserRepo.create).toHaveBeenCalled();
-       //expect(mockUserRepo.create).toHaveBeenCalledWith({ "email": "gbeir@yas.cim", "name": "Gerardo", "password": "1234", "state": true });
+        //expect(mockUserRepo.create).toHaveBeenCalledWith({ "email": "gbeir@yas.cim", "name": "Gerardo", "password": "1234", "state": true });
     })
 
 })

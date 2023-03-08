@@ -1,10 +1,16 @@
 import { Sqlite } from '../connections/Sqlite.connections'
 import { PostgresConn } from '../connections/Postgres.connection'
 import dotenv from 'dotenv'
+import { Sequelize } from 'sequelize'
 dotenv.config()
 
+
+
+
 // ahora la coneccion se guarda aqui 
-export const sequelize = new Sqlite().createConnection()
+export const sequelize = new Sequelize('sqlite::memory:')
+
+//export const sequelize = new Sqlite().createConnection()
 
 /** solo tenemos que cambiar la conexion para
  *  mudar la base de datos                 

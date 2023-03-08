@@ -1,4 +1,4 @@
-import { passwordHandler } from "../utils/password.handler";
+import { passwordHandler } from "../../utils/password.handler";
 
 
 describe('first', () => { 
