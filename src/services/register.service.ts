@@ -2,10 +2,19 @@ import { UsersInterface } from "../interfaces/User.interface";
 import User from "../models/User.model";
 
 export class RegisterService {
+
+    private connect:Connection;
+
+    constructor() {
+        this.name = "hello";
+      }
+
+    private async checkIfUserExist(email: string) {
+        return await User.findOne({ where: { email: email } });
+    }
+    
     public async registerNewUser(name: string, email: string, password: string) {
-        const check = await User.findOne({ where: { email: email } })
-        if (check) return "USER_ALREDY_EXIST"
-        const user = User.create({ name: name, email: email, password: password, state: true })
-        return user
+        //if (await this.checkIfUserExist(email)) return "USER_ALREDY_EXIST"
+        return await User.create({ name: name, email: email, password: password, state: true })
     }
 }

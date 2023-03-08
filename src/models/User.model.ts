@@ -21,7 +21,6 @@ export default class User extends Model<User> {
     @Column
     state!: boolean
 }
-
  */
 
 import { UsersInterface } from "../interfaces/User.interface";
@@ -59,10 +58,5 @@ const User = db.define<UsersInterface>(
 },
 )
 
-User.sync().then(() => {
-    console.log("Table Users sync")
-}).catch((err) => {
-    console.log("Table Users error" + err)
-})
 
 export default User;

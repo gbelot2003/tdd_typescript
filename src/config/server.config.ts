@@ -31,7 +31,7 @@ export class Server {
     async dbConnect() {
         const conn = this._connection
         await conn.createConnection()
-        await conn.syncDatabase()
+        await this.syncDatabase()
     }
 
     listen() {
