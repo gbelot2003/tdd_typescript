@@ -10,7 +10,6 @@ export class CheckUser {
 
     public async checkIfUserExist(email: string) {
         const user = await this._repo.findBy(email)
-        console.log(user)
         if(!user) return false
         return true
     }
