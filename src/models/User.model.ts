@@ -3,7 +3,7 @@ import { UserInterface } from '../interfaces/User.interface';
 import { sequelize } from '../config/sqlite.connect'
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> implements UserInterface {
-    declare id: number;
+    declare id?: number;
     declare name: string
     declare email: string
     declare password: string

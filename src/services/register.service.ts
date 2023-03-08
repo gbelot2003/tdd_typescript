@@ -1,22 +1,23 @@
-
-
-import { UsersInterface } from "../interfaces/User.interface";
-import User from "../models/User.model";
+import { UserRepository } from "../repositories/User.repository";
 
 export class RegisterService {
 
-    private connect:Connection;
+    private _repo: UserRepository
 
-    constructor() {
-        this.name = "hello";
-      }
-
-    private async checkIfUserExist(email: string) {
-        return await User.findOne({ where: { email: email } });
+    constructor(repo: UserRepository) {
+        this._repo = repo
     }
-    
-    public async registerNewUser(name: string, email: string, password: string) {
-        //if (await this.checkIfUserExist(email)) return "USER_ALREDY_EXIST"
-        return await User.create({ name: name, email: email, password: password, state: true })
+
+    private async checkUserExistence(email: string) {
+        const user = await this._repo.findBy(email);
+        if (user) return true
+        return false
+    }
+
+    public async registerNewUser(name: string, email: string, password: string, cheked: boolean) {
+        if(!cheked) return 'ALREDY_EXIST'
+        const user = { name: name, email: email, password: password, state: true }
+        const model = await this._repo.create(user)
+        return model;
     }
 }

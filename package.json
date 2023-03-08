@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon ./src/App.ts",
     "start": "nodemon --exec ts-node ./src/App.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "author": "",
   "license": "ISC",
