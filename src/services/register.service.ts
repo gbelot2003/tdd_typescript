@@ -15,7 +15,7 @@ export class RegisterService {
     }
 
     public async registerNewUser(name: string, email: string, password: string, cheked: boolean) {
-        if(!cheked) return 'ALREDY_EXIST'
+        if(cheked) return 'ALREDY_EXIST'
         const user = { name: name, email: email, password: password, state: true }
         const model = await this._repo.create(user)
         return model;
