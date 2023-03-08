@@ -39,7 +39,7 @@ describe("Check method \'RegisterController\' ", () => {
 
         expect(res.send).toHaveBeenCalledTimes(2)
         expect(res.send.mock.calls.length).toBe(2);
-        expect(res.send).toHaveBeenCalledWith({"message": 'usuario registrado'});
+        expect(res.send).toHaveBeenCalledWith({ "message": 'usuario registrado' });
     })
 
     test('should 404 and return correct value', async () => {
@@ -55,7 +55,7 @@ describe("Check method \'RegisterController\' ", () => {
         await controller.registerUser(req, res)
 
         expect(res.send).toHaveBeenCalledTimes(1)
-        expect(res.send).toHaveBeenCalledWith({"message": "Error inmporting"});
+        expect(res.send).toHaveBeenCalledWith({ "message": "Error inmporting" });
 
     })
 })
