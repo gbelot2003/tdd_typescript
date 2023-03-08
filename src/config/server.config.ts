@@ -11,9 +11,9 @@ export class Server {
 
     constructor(_port: string) {
         this.app = express()
-        this.dbConnect()
         this.port = _port
         this.listen()
+        this.dbConnect()
     } 
 
     middlewares() {
@@ -26,12 +26,15 @@ export class Server {
         this.app.use(cors())
     }
 
+    /** metodo de prueba de coneccion */
     async dbConnect() {
         await this.syncDatabase()
     }
 
+    /** metodo de prueba de coneccion */
     syncDatabase(){
         const user = new User()
+        console.log('connections read')
     }
 
     listen() {

@@ -1,8 +1,20 @@
 import { DataTypes, Model, Optional, Sequelize, InferAttributes, InferCreationAttributes } from 'sequelize'
-import { sequelize } from '../connections/Connect.connection'
+import { sequelize } from '../config/sqlite.connect'
 
 
-class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+interface Auth {
+    email: string
+    password: string
+}
+
+interface UserInterface extends Auth {
+    id: number;
+    name: string
+    state: boolean
+}
+
+
+class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> implements UserInterface {
     declare id: number;
     declare name: string
     declare email: string
@@ -35,9 +47,8 @@ User.init({
         type: DataTypes.BOOLEAN,
         allowNull: false,
     },
-}, {
-    sequelize,
-})
+}, { sequelize }
+)
 
 User.sync()
 export default User;
