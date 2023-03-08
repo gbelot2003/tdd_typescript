@@ -2,19 +2,19 @@ import { Connections } from "../interfaces/Connections.interfaces";
 import express, { Application } from "express";
 const bp = require("body-parser")
 import cors from "cors"
+import User from "../models/User.model";
+
 
 export class Server {
     private app: Application
     private port: string
-    public _connection: Connections
 
-    constructor(_port: string, dbConnection: Connections) {
-        this._connection = dbConnection
+    constructor(_port: string) {
         this.app = express()
         this.dbConnect()
         this.port = _port
         this.listen()
-    }
+    } 
 
     middlewares() {
         // body parse
@@ -26,9 +26,12 @@ export class Server {
         this.app.use(cors())
     }
 
-    dbConnect() {
-        const conn = this._connection
-        conn.createConnection()
+    async dbConnect() {
+        await this.syncDatabase()
+    }
+
+    syncDatabase(){
+        const user = new User()
     }
 
     listen() {

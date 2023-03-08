@@ -11,13 +11,14 @@ services:
     ports:
       - "3000:3000"
 
-  postgres: 
-    image: postgres:14.1-alpine
+  postgres:
+    image: postgres:15-alpine
     restart: always
     env_file: ./.env
     environment:
-      - POSTGRES_USER=$DB_ROOT_PASSWORD
-      - POSTGRES_PASSWORD=$DB_DATABASE
+      - POSTGRES_DB=$DB_DATABASE
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_ROOT_PASSWORD
     ports:
       - $DB_LOCAL_PORT:$DB_DOCKER_PORT
     volumes:
