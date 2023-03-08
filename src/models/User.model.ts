@@ -1,18 +1,6 @@
-import { DataTypes, Model, Optional, Sequelize, InferAttributes, InferCreationAttributes } from 'sequelize'
+import { DataTypes, Model, InferAttributes, InferCreationAttributes } from 'sequelize'
+import { UserInterface } from '../interfaces/User.interface';
 import { sequelize } from '../config/sqlite.connect'
-
-
-interface Auth {
-    email: string
-    password: string
-}
-
-interface UserInterface extends Auth {
-    id: number;
-    name: string
-    state: boolean
-}
-
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> implements UserInterface {
     declare id: number;
@@ -24,10 +12,10 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> i
 
 User.init({
     id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER,
         unique: true,
     },
     name: {
