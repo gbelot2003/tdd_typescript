@@ -1,8 +1,15 @@
-import { Request, Response } from 'express';
 import { RegisterController } from "../../controllers/Register.controller";
-import User from '../../models/User.model';
 const { mockRequest, mockResponse } = require('./utils')
-import { RegisterService } from '../../services/register.service';
+
+
+jest.mock('sequelize')
+
+
+jest.mock('../../services/register.service', () => {
+    return {
+        registerNewUser: jest.fn()
+    }
+});
 
 const mockUserService = {
     registerNewUser: jest.fn()
@@ -12,13 +19,6 @@ const mockUserRepo = {
     findBy: jest.fn(),
     create: jest.fn()
 }
-
-jest.mock('../../services/register.service', () => {
-    return {
-        registerNewUser: jest.fn()
-    }
-});
-
 
 describe("Check method \'RegisterController\' ", () => {
     test('should 200 and return correct value', async () => {
@@ -44,10 +44,7 @@ describe("Check method \'RegisterController\' ", () => {
 
     test('should 404 and return correct value', async () => {
         let req = mockRequest();
-        req.body = {
-            name: 'Gerard',
-            password: '1234567'
-        }
+        req.body = {}
 
         const res = await mockResponse();
 
@@ -55,7 +52,7 @@ describe("Check method \'RegisterController\' ", () => {
         await controller.registerUser(req, res)
 
         expect(res.send).toHaveBeenCalledTimes(1)
-        expect(res.send).toHaveBeenCalledWith({ "message": "Error inmporting" });
+        expect(res.send).toHaveBeenCalledWith({message: 'Error Validation Data'});
 
     })
 })

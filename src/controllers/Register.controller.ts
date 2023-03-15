@@ -21,7 +21,7 @@ export class RegisterController {
             const responce = await this._registerService.registerNewUser(body, checker, pass)
             return res.status(200).send({body: responce}).send({message: 'usuario registrado'})   
         } catch (e) {
-            return res.status(404).send({message: 'Error inmporting'});
+            return res.status(404).send({message: 'Error Validation Data'});
         }
         
         
