@@ -13,7 +13,7 @@ afterEach(() => {
 
 describe('testing create service', () => {
 
-    it('user Register service with created', async () => {
+    it('user Register service is call when checker i false', async () => {
 
         const user = {
             name: 'Gerardo',
@@ -21,17 +21,34 @@ describe('testing create service', () => {
             password: 'password'
         }
 
-        const pass = await new passwordHandler().encrypt(user.password)
-
-        const checker = await new CheckUser(mockUserRepo).checkIfUserExist(user.email)
+        const checker = false
 
         new RegisterService(mockUserRepo)
-            .registerNewUser(user, checker, pass)
+            .registerNewUser(user, checker, user.password)
 
         expect(mockUserRepo.create).toHaveBeenCalled();
-        //expect(mockUserRepo.create).toHaveBeenCalledWith({ "email": "gbeir@yas.cim", "name": "Gerardo", "password": "1234", "state": true });
     })
 
+
+    it('user Register service is never call when checker is true', async () => {
+
+        const user = {
+            name: 'Gerardo',
+            email: 'ge@belot.com',
+            password: 'password'
+        }
+
+        // If checker is true, the user already exist, so create 
+        // is never called
+        const checker = true
+
+        new RegisterService(mockUserRepo)
+            .registerNewUser(user, checker, user.password)
+
+        expect(mockUserRepo.create).toBeCalledTimes(0);
+    })
 })
+
+
 
 
