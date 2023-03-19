@@ -19,7 +19,6 @@ export class Server {
     middlewares() {
         // body parse
         this.app.use(bp.urlencoded({ extended: false }))
-        this.app.use(bp.urlencoded())
         this.app.use(bp.json())
 
         //CORS
